@@ -12,21 +12,21 @@ class RotateMatrixHandler {
         prevMatrix = matrix = inputMatrix;
         while (numberOfRotations !== 0) {
           matrix = [];
-            for (let i = 0, cl = prevMatrix.length; i < cl; i++) {
-              for (let j = 0, rl = prevMatrix[i].length; j < rl; j++) {
-                if (cl !== rl) {
-                  return [];
-                }
-                matrix[i] = matrix[i] || [];
-                matrix[i][j] = prevMatrix[j][i];
+          for (let i = 0, column = prevMatrix.length; i < column; i++) {
+            for (let j = 0, row = prevMatrix[i].length; j < row; j++) {
+              if (column !== row) {
+                return [];
               }
-      
-              if (numberOfRotations > 0) {
-                matrix[i] = matrix[i].reverse();
-              }
+              matrix[i] = matrix[i] || [];
+              matrix[i][j] = prevMatrix[j][i];
             }
-            numberOfRotations--;
-            prevMatrix = matrix;
+    
+            if (numberOfRotations > 0) {
+              matrix[i] = matrix[i].reverse();
+            }
+          }
+          numberOfRotations--;
+          prevMatrix = matrix;
         }
         return matrix;
     }

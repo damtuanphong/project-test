@@ -6,6 +6,7 @@ class Vertex{
         this.name = _name;
         this.weight = _weight;
     }
+
 }
 
 export class Graph {
@@ -19,12 +20,10 @@ export class Graph {
         }
 	} 
 
-    // add vertex to the graph 
     private addVertex(v: Vertex) { 
         this.adjacencyList.set(v, []); 
     } 
 
-    // add edge to the graph 
     public addEdge(v: string, w: string) 
     { 
         const vertexV = this.getVertexByName(v);
@@ -32,7 +31,7 @@ export class Graph {
         this.adjacencyList.get(vertexV).push(vertexW);
     } 
 
-    public getVertexByName(name: string): Vertex{
+    private getVertexByName(name: string): Vertex{
         for (let [vertex, _] of this.adjacencyList){
             if(vertex.name === name){
                 return vertex;
@@ -40,7 +39,7 @@ export class Graph {
         }
     }
 
-	public depthFirstTraversal(vertex: Vertex) { 
+	private depthFirstTraversal(vertex: Vertex) { 
         let visited = {}; 
         // for (let i = 0; i < this.numberOfVertices; i++) {
         //     visited[i] = false; 
