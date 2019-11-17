@@ -33,33 +33,52 @@ export class Graph {
     } 
 
     public getVertexByName(name: string): Vertex{
-        for (let [k, _] of this.adjacencyList){
-            if(k.name === name){
-                return k;
+        for (let [vertex, _] of this.adjacencyList){
+            if(vertex.name === name){
+                return vertex;
             }
         }
     }
 
-	public depthFirstTraversal(startingNode: string) { 
-        let visited = []; 
-        for (let i = 0; i < this.numberOfVertices; i++) {
-            visited[i] = false; 
-        }
-        const vertex = this.getVertexByName(startingNode);
+	public depthFirstTraversal(vertex: Vertex) { 
+        let visited = {}; 
+        // for (let i = 0; i < this.numberOfVertices; i++) {
+        //     visited[i] = false; 
+        // }        
         this.traversal(vertex, visited); 
+        return visited;
     } 
 
     private traversal(vert: Vertex, visited: any) { 
         visited[vert.name] = true; 
-        console.log(vert.name); 
-        const neighbours = this.adjacencyList.get(vert); 
-        //console.log(neighbours); 
+        const neighbours = this.adjacencyList.get(vert);  
         for (let i in neighbours) { 
             let neighbour = neighbours[i];                        
             if (!visited[neighbour.name]){
                 this.traversal(neighbour, visited); 
             }
         } 
+    }
+
+    public findOptimalPath(startingNode: string) {
+        let path = startingNode;
+        let sumOfWeights = 0
+        const vertex = this.getVertexByName(startingNode);        
+        if(vertex){
+            const vertices = this.depthFirstTraversal(vertex);
+            const visited = [];
+            for (let [vertex, _] of this.adjacencyList){
+                if(vertices[vertex.name]){
+                    visited.push(vertex.name);
+                    sumOfWeights = sumOfWeights + vertex.weight;
+                }
+            }
+            path = visited.toString();
+        }
+        return {
+            path: path,
+            sumOfWeights: sumOfWeights
+        };
     }
 
 }
