@@ -4,6 +4,7 @@ This is node module for testing
 1) rotate a matrix by 90 degrees clockwise
 2) finding optimal path of directed acyclic graph
 
+Technical notes
 * TypeScript: to provide highly productive development tools for JavaScript IDEs and practices, like static checking. TypeScript makes code easier to read and understand.
 * Mocha/Chai : for unit testing the application
 
